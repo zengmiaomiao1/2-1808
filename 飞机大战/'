@@ -1,0 +1,69 @@
+'''
+import pygame
+class GameSprite(pygame.sprite.Sprite):
+	def __init__(self,imagename,speed = 1):
+		super().__init__()
+		self.image = pygame.image.load(imagename)
+		bgs = backgroundsprite
+		self.rect = self.image.get_rect()
+		self.speed = speed
+	def update(self):
+		self.rect.y += self.speed
+
+class EnemySprite(GameSprite):
+	def __init__(self):
+		imagename = "./images/enemy1.png"
+		super().__init__(imagename,10)
+
+
+class BackgroundSprite(GameSprite):
+	def __init__(self,isalt = True):
+		imagename = "./images/background.png"
+		super().__init__(imagename)
+		if not isalt:
+			self.rect.bottom = 0
+	def update(self):
+		super().update()
+		if self.rect.top >= SCREEN_RECT.height:
+			self.rect.bottom = 0
+'''
+import pygame
+from GameSprite import *
+class PlaneGame(object):
+	def __init__(self):
+		print("游戏初始化")
+		self.screen = pygame.display.set_mode((300,600))
+		self.clock = pygame.time.tick
+		self.__create__sprites()
+		pygame.time.set_time(CREATE_ENEMY_EVENT,1000)
+		self.enemy_group = pygame.sprite.Group()
+	def start__game(self):
+		print("开始游戏...")
+		while True:
+			self.clock.tick(60)
+			self.__event__handler()
+			self.__check__sprite()
+			self.__update__sprite()
+			pygame.display.update()
+	def __create__sprites(self):
+		bgs = Backgroundsprite()
+		bgs1 = Backgroundsprite(False)
+		self.bgsg = BackGroundSprite.Group(bgs,bgs1)
+	def __event__handler(self):
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				PlaneGame.__game__over()
+			elif event.type == CREANT_ENMY_EVENT:
+				enemy = EnemySprite()
+				self.enemy_group.add(enemy)
+	def __check__collide(self):
+		pass
+	def __update__sprites(self):
+		self.bgsg.update()
+		self.bgsg.draw(self.screen)
+		@startmethod
+		def __game__over():
+			print("结束游戏")
+			pygame.quit()
+			exit()
+
