@@ -1,22 +1,44 @@
-#coding=utf-8
-try:
-	#open("1.txt","r")
-	1/0
-	#print(b)
-	#print("老王")
-except (NameError,FileNotFoundError):
-	print("捕获指定异常")
-except Exception as ret:
-	print("捕获任何异常")
-	print(ret)
-else:
-	print("没有任何异常走的逻辑")
-finally:
-	print("不管有没有异常都会走")
-'''
-不是所有得代码都需要加上异常
-可能会出现一次才加上捕获
-'''
-	except ValueError:
-		print("出现异常")
-number = int(input("请输入功能"))
+class Dog(object):
+	__instance = None
+	__flag = True
+	def __init__(self,name):
+		if Dog.__flag:
+			self.name = name
+			Dog.__flag = False
+	def __new__(cls,*a0rgs0,**kwargs):
+		if cls.__instance == None:
+			cls.__instance = super().__new__(cls)
+			return cls.__instance
+		else:
+			return cls.__instance
+dog = Dog("小红")
+dog1 = Dog("小明")
+print(id(dog))
+print(id(dog1))
+print(dog.name)
+print(dog1.name)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

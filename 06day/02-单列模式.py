@@ -5,7 +5,7 @@ class Dog(object):
 		if Dog.__flag:
 			self.name = name
 			Dog.__flag = False
-	def __new__(cls,*args,**kwargs):
+	def __new__(cls,*a0rgs0,**kwargs):
 		if cls.__instance == None:
 			cls.__instance = super().__new__(cls)
 			return cls.__instance
